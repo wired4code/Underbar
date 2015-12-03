@@ -42,7 +42,7 @@
     if (n === 0){
 
       return [];
-    } 
+    }
 
     else if (n > array.length) {
       return array;
@@ -120,7 +120,7 @@
     _.each(array, function(item){
        if(_.indexOf(result, item) === -1){
         result.push(item);
-       } 
+       }
     })
     return result;
   };
@@ -159,19 +159,19 @@
   // Reduces an array or object to a single value by repetitively calling
   // iterator(accumulator, item) for each item. accumulator should be
   // the return value of the previous iterator call.
-  //  
+  //
   // You can pass in a starting value for the accumulator as the third argument
   // to reduce. If no starting value is passed, the first element is used as
   // the accumulator, and is never passed to the iterator. In other words, in
   // the case where a starting value is not passed, the iterator is not invoked
   // until the second element, with the first element as its second argument.
-  //  
+  //
   // Example:
   //   var numbers = [1,2,3];
   //   var sum = _.reduce(numbers, function(total, number){
   //     return total + number;
   //   }, 0); // should be 6
-  //  
+  //
   //   var identity = _.reduce([5], function(total, number){
   //     return total + number * number;
   //   }); // should be 5, regardless of the iterator function passed in
@@ -224,7 +224,7 @@
     return !(_.every(collection, function(item){
       if(iterator === undefined){
         return !item;
-      } 
+      }
       else {
         return !iterator(item);
       }
@@ -318,16 +318,17 @@
 
     var result = {};
 
-    return function(val){
+    return function(){
 
-      if(val in result){
-        return result[val];
+      var key = Array.prototype.slice.call(arguments);
+
+      if(key in result){
+        return result[key];
       }
 
       else {
 
-        result[val] = func.apply(this, arguments);
-        return result[val];
+        return result[key] = func.apply(this, arguments);
       }
     }
   };
@@ -346,7 +347,7 @@
     }
 
     return setTimeout(function(){
-      
+
       func.apply(null, args);
 
     }, wait);
@@ -373,11 +374,11 @@
         var index = Math.floor(Math.random() * length);
         var item = copy[index];
         shuffled.push(item);
-        copy.splice(index,1); 
+        copy.splice(index,1);
         length -= 1;
       }
       return shuffled;
-    
+
   };
 
 
