@@ -421,23 +421,6 @@
         }
 
       });
-/*    if(typeof iterator === 'string'){
-      return collection.sort(function(a,b){
-
-        if(a[iterator] > b[iterator] || a[iterator] === undefined){
-          return 1;
-        }
-        else if(a[iterator] < b[iterator] || b[iterator] === undefined) {
-          return -1;
-        }
-        else {
-          return 0;
-        }
-      });
-    }
-    else {
-      return collection.sort(iterator);
-    }*/
   };
 
   // Zip together two or more arrays with elements of the same index
@@ -446,6 +429,21 @@
   // Example:
   // _.zip(['a','b','c','d'], [1,2,3]) returns [['a',1], ['b',2], ['c',3], ['d',undefined]]
   _.zip = function() {
+    var results = [];
+    var arrs = Array.prototype.slice.call(arguments);
+    var max = Math.max.apply(null, _.map(arrs, function(arr){
+            return arr.length;})
+    );
+
+    for(var i = 0; i < max; i++){
+      var temp = [];
+      for(var j = 0; j < arrs.length; j++){
+        temp.push(arrs[j][i]);
+      }
+      results.push(temp);
+    }
+
+    return results;
   };
 
   // Takes a multidimensional array and converts it to a one-dimensional array.
