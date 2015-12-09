@@ -491,6 +491,22 @@
   // Take the difference between one array and a number of other arrays.
   // Only the elements present in just the first array will remain.
   _.difference = function(array) {
+
+    var args = Array.prototype.slice.call(arguments);
+    var results = array;
+    var index;
+
+    for(var i = 1; i < args.length; i++){
+      for(var j = 0; j < args.length; j++){
+        if(_.contains(array, args[i][j])){
+          index = _.indexOf(results, args[i][j]);
+          results.splice(index,1);
+        }
+      }
+    }
+
+    return results;
+
   };
 
   // Returns a function, that, when invoked, will only be triggered at most once
