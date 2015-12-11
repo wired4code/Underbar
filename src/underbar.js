@@ -21,7 +21,6 @@
    *
    * IMPORTANT NOTE!
    * ===========
-   *
    * The .first function is implemented for you, to help guide you toward success
    * in your work on the following functions. Whenever you see a portion of the
    * assignment pre-completed, be sure to read and understand it fully before
@@ -515,5 +514,29 @@
   //
   // Note: This is difficult! It may take a while to implement.
   _.throttle = function(func, wait) {
+
+
+    var end = null;
+    var timer;
+    var cached;
+    var delay;
+
+    return function(){
+      var start = Date.now();
+      if(start < wait + end){
+        clearTimeout(timer);
+        timer = setTimeout(function(){
+          end = start;
+          delay = wait - (end - start);
+          func.apply(this, arguments);
+        }, delay)
+        return cached;
+      }
+      else {
+        end = start;
+        cached = func.apply(this, arguments);
+        return cached;
+      }
+    }
   };
 }());
