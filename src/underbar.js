@@ -516,7 +516,7 @@
   _.throttle = function(func, wait) {
 
 
-    var end = null;
+/*  var end = null;
     var timer;
     var cached;
     var delay;
@@ -537,6 +537,22 @@
         cached = func.apply(this, arguments);
         return cached;
       }
-    }
+    }*/
+
+    var alreadyCalled = false;
+    var result;
+
+    return function() {
+      if (!alreadyCalled) {
+        setTimeout(function(){
+          result = func.apply(this, arguments);
+          alreadyCalled = true;
+        }, wait)
+
+      }
+      return result;
+    };
+
+
   };
 }());
